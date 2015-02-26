@@ -1,0 +1,150 @@
+{
+    # PGN parameters
+    
+    'component': 'mozaik.sheets.vision.VisualCorticalUniformSheet', # used as start
+    'params':{
+        'name':'PGN',
+        'sx': 200.0, # μm
+        'sy': 200.0, # 
+        'density': 100.0,
+        'mpi_safe' : False,
+        'magnification_factor': 200.0, # μm/degree
+        'cell': {
+            'model' : 'IF_cond_exp',
+            'params' : {
+                'v_thresh': -50.0,  # HuertasGroffSmith2005 # -35, # Coombes2003
+                'v_rest': -62.0,    # HuertasGroffSmith2005
+                'v_reset': -55.0,   # HuertasGroffSmith2005
+                'tau_refrac': 4.0,  # HuertasGroffSmith2005
+                'tau_m': 20.0,      # ms # 17.3, # Rall1995 # 23.0, # DestexheContrerasSteriadeSejnowski1996
+                'cm': 1.0,          # HuertasGroffSmith2005
+                'e_rev_E': 0.0,     # HuertasGroffSmith2005
+                'e_rev_I': -85.0,   # HuertasGroffSmith2005
+                'tau_syn_E': 6.0,   # <<<<<<<<<<<<<<<<<<<<<<<<<<< New!!!
+                'tau_syn_I': 10.0,  # Kremkow
+            },
+            'initial_values' : {
+                'v': -70.0,
+            }
+        },
+        'artificial_stimulators' : {},  
+        'recorders' :  url("param/pgn_rec"),
+        'recording_interval': 0.1,
+    },
+
+
+    # Connectivity
+    #
+    # LGN-PGN: AMPA 
+    # ~40 nS   (retina) BlitzRegehr2003
+    #
+    # PGN-PGN: GABA   
+    #
+    # PGN-LGN: GABA  
+    # ~10 nS     BlitzRegehr2003
+
+    # from LGN On
+    'LGN_PGN_ConnectionOn': {
+        'target_synapses' : 'excitatory',             
+        'short_term_plasticity': None, 
+        'fan_in' : True,
+        'weight_functions' : {
+            'f1' : {
+                'component' : 'mozaik.connectors.modular_connector_functions.ExponentialDecayModularConnectorFunction',
+                'params' : {
+                    'arborization_constant': 200.0,  # μm decay distance from the innervation point
+                    'arborization_scaler': 1.0,   # the scaler of the exponential decay
+                }
+            }, 
+        },
+        'delay_functions' : {},
+        'weight_expression' : 'f1', 
+        'delay_expression' : '1', # Lindstrom1982, FunkeEysel1998, RogalaWaleszczyLeskiWrobelWojcik2013
+        'base_weight': 0.004, # µS
+        'num_samples' : 10,
+    },
+
+    # from LGN Off
+    'LGN_PGN_ConnectionOff': {
+        'target_synapses' : 'excitatory',             
+        'short_term_plasticity': None, 
+        'fan_in' : True,
+        'weight_functions' : {
+            'f1' : {
+                'component' : 'mozaik.connectors.modular_connector_functions.ExponentialDecayModularConnectorFunction',
+                'params' : {
+                    'arborization_constant': 200.0,  # μm decay distance from the innervation point
+                    'arborization_scaler': 1.0,   # the scaler of the exponential decay
+                }
+            }, 
+        },
+        'delay_functions' : {},
+        'weight_expression' : 'f1',
+        'delay_expression' : '1', # Lindstrom1982, FunkeEysel1998, RogalaWaleszczyLeskiWrobelWojcik2013
+        'base_weight': 0.004, # µS 
+        'num_samples' : 10,
+    },
+    
+    # lateral
+    'PGN_PGN_Connection': {
+        'target_synapses' : 'inhibitory',             
+        'short_term_plasticity': None, 
+        'fan_in' : True,
+        'weight_functions' : {
+            'f1' : {
+                'component' : 'mozaik.connectors.modular_connector_functions.ExponentialDecayModularConnectorFunction',
+                'params' : {
+                    'arborization_constant': 200.0,  # μm decay distance from the innervation point
+                    'arborization_scaler': 1.0,   # the scaler of the exponential decay
+                }
+            }, 
+        },
+        'delay_functions' : {},
+        'weight_expression' : 'f1',
+        'delay_expression' : '1', # RogalaWaleszczyLeskiWrobelWojcik2013
+        'base_weight': 0.001, # µS
+        'num_samples' : 10,
+    },
+
+    # to LGN
+    'PGN_LGN_ConnectionOn': {
+        'target_synapses' : 'inhibitory',             
+        'short_term_plasticity': None ,
+        'fan_in' : True,
+        'weight_functions' : {
+            'f1' : {
+                'component' : 'mozaik.connectors.modular_connector_functions.ExponentialDecayModularConnectorFunction',
+                'params' : {
+                    'arborization_constant': 200.0,  # μm decay distance from the innervation point
+                    'arborization_scaler': 1.0,   # the scaler of the exponential decay
+                }
+            }, 
+        },
+        'delay_functions' : {},
+        'weight_expression' : 'f1',
+        'delay_expression' : '1', # Lindstrom1982, FunkeEysel1998, RogalaWaleszczyLeskiWrobelWojcik2013
+        'base_weight': 0.005, # µS
+        'num_samples' : 10,
+    },
+    # to LGN
+    'PGN_LGN_ConnectionOff': {
+        'target_synapses' : 'inhibitory',             
+        'short_term_plasticity': None ,
+        'fan_in' : True,
+        'weight_functions' : {
+            'f1' : {
+                'component' : 'mozaik.connectors.modular_connector_functions.ExponentialDecayModularConnectorFunction',
+                'params' : {
+                    'arborization_constant': 200.0,  # μm decay distance from the innervation point
+                    'arborization_scaler': 1.0,   # the scaler of the exponential decay
+                }
+            }, 
+        },
+        'delay_functions' : {},
+        'weight_expression' : 'f1',
+        'delay_expression' : '1', # Lindstrom1982, FunkeEysel1998, RogalaWaleszczyLeskiWrobelWojcik2013
+        'base_weight': 0.005, # µS
+        'num_samples' : 10,
+    },
+
+}
