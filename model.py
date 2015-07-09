@@ -8,6 +8,9 @@ from mozaik.connectors.fast import OneToOneConnector
 from mozaik import load_component
 from mozaik.space import VisualRegion
 
+# Manage what is executed
+withPGN = True
+withV1 = True
 
 class ThalamoCorticalModel(Model):
     
@@ -15,18 +18,18 @@ class ThalamoCorticalModel(Model):
         'l4_cortex_exc' : ParameterSet, 
         'l4_cortex_inh' : ParameterSet, 
         'pgn' : ParameterSet, 
-        'lgn_on' : ParameterSet, 
-        'lgn_off' : ParameterSet, 
-        'retina' : ParameterSet,
+        # 'lgn_on' : ParameterSet, 
+        # 'lgn_off' : ParameterSet, 
+        'lgn' : ParameterSet,
         'visual_field' : ParameterSet 
     })
     
     def __init__(self, sim, num_threads, parameters):
         Model.__init__(self, sim, num_threads, parameters)        
         # Load components
-        Retina = load_component(self.parameters.retina.component)
+        LGN = load_component(self.parameters.lgn.component)
         # Instance
-        self.input_layer = Retina(self, self.parameters.retina.params)
+        self.input_layer = LGN(self, self.parameters.lgn.params)
       
         # Build and instrument the network
         self.visual_field = VisualRegion(
@@ -40,35 +43,8 @@ class ThalamoCorticalModel(Model):
         # PROJECTIONS
         ########################################################
 
-        # LGN
-        if True:
-            # Load components
-            LGN_ON = load_component( self.parameters.lgn_on.component )
-            LGN_OFF = load_component( self.parameters.lgn_off.component )
-
-            # Instance
-            lgn_on = LGN_ON( self, self.parameters.lgn_on.params )
-            lgn_off = LGN_OFF( self, self.parameters.lgn_off.params )
-
-            # Retina-LGN
-            OneToOneConnector(
-                self,
-                'Retina_LGN_ConnectionOn',                  # name
-                self.input_layer.sheets['X_ON'],            # source
-                lgn_on,                                     # target
-                self.parameters.lgn_on.Retina_LGN_ConnectionOn # params
-            ).connect()
-
-            OneToOneConnector(
-                self,
-                'Retina_LGN_ConnectionOff',                 # name
-                self.input_layer.sheets['X_OFF'],           # source
-                lgn_off,                                    # target
-                self.parameters.lgn_off.Retina_LGN_ConnectionOff# params
-            ).connect()
-
         # PGN
-        if True:
+        if withPGN:
             # Load components
             PGN = load_component( self.parameters.pgn.component )
             # Instance
@@ -78,7 +54,7 @@ class ThalamoCorticalModel(Model):
             ModularSamplingProbabilisticConnector(
                 self,
                 'LGN_PGN_ConnectionOn',                     # name
-                lgn_on,            # source
+                self.input_layer.mozaik_sheets['X_ON'],     # source
                 pgn,                                        # target
                 self.parameters.pgn.LGN_PGN_ConnectionOn    # params
             ).connect()
@@ -86,7 +62,7 @@ class ThalamoCorticalModel(Model):
             ModularSamplingProbabilisticConnector(
                 self,
                 'LGN_PGN_ConnectionOff',                    # name
-                lgn_off,           # source
+                self.input_layer.mozaik_sheets['X_OFF'],    # source
                 pgn,                                        # target
                 self.parameters.pgn.LGN_PGN_ConnectionOff   # params
             ).connect()
@@ -103,7 +79,7 @@ class ThalamoCorticalModel(Model):
                 self,
                 'PGN_LGN_ConnectionOn',                     # name
                 pgn,                                        # source
-                lgn_on,            # target
+                self.input_layer.mozaik_sheets['X_ON'],     # target
                 self.parameters.pgn.PGN_LGN_ConnectionOn    # params
             ).connect()
 
@@ -111,11 +87,11 @@ class ThalamoCorticalModel(Model):
                 self,
                 'PGN_LGN_ConnectionOff',                    # name
                 pgn,                                        # source
-                lgn_off,           # target
+                self.input_layer.mozaik_sheets['X_OFF'],    # target
                 self.parameters.pgn.PGN_LGN_ConnectionOff   # params
             ).connect()
 
-        if True: # CTC
+        if withV1: # CTC
             # Load components
             CortexExcL4 = load_component(self.parameters.l4_cortex_exc.component)
             CortexInhL4 = load_component(self.parameters.l4_cortex_inh.component)
@@ -127,8 +103,8 @@ class ThalamoCorticalModel(Model):
             # THALAMO-CORTICAL
             GaborConnector(
                 self,
-                lgn_on,
-                lgn_off,
+                self.input_layer.mozaik_sheets['X_ON'],
+                self.input_layer.mozaik_sheets['X_OFF'],
                 cortex_exc_l4,                                      # target
                 self.parameters.l4_cortex_exc.AfferentConnection,   # parameters
                 'V1AffConnection'                                   # name
@@ -136,8 +112,8 @@ class ThalamoCorticalModel(Model):
 
             GaborConnector(
                 self,
-                lgn_on,
-                lgn_off,
+                self.input_layer.mozaik_sheets['X_ON'],
+                self.input_layer.mozaik_sheets['X_OFF'],
                 cortex_inh_l4,
                 self.parameters.l4_cortex_inh.AfferentConnection,
                 'V1AffInhConnection'
@@ -183,7 +159,7 @@ class ThalamoCorticalModel(Model):
                 self,
                 'V1EffConnectionOn',
                 cortex_exc_l4,
-                lgn_on,
+                self.input_layer.mozaik_sheets['X_ON'],
                 self.parameters.l4_cortex_exc.EfferentConnection_LGN
             ).connect()
 
@@ -191,7 +167,7 @@ class ThalamoCorticalModel(Model):
                 self,
                 'V1EffConnectionOff',
                 cortex_exc_l4,
-                lgn_off,
+                self.input_layer.mozaik_sheets['X_OFF'],
                 self.parameters.l4_cortex_exc.EfferentConnection_LGN
             ).connect()
 
