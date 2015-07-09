@@ -13,25 +13,25 @@ def create_experiments(model):
 
       # LUMINANCE SENSITIVITY
       # as in PapaioannouWhite1972
-      MeasureFlatLuminanceSensitivity(
-          model, 
-          luminances=[0.01, 20.0, 50.0, 100.0], #[0.01, 0.1, 1.0, 10.0, 20.0, 100.0],
-          step_duration=147*7,
-          num_trials=10 # 14
-      ),
+      # MeasureFlatLuminanceSensitivity(
+      #     model, 
+      #     luminances=[0.01, 20.0, 50.0, 100.0], #[0.01, 0.1, 1.0, 10.0, 20.0, 100.0],
+      #     step_duration=147*7,
+      #     num_trials=14 # 14
+      # ),
 
       # CONTRAST SENSITIVITY
       # as in DerringtonLennie1984, HeggelundKarlsenFlugsrudNordtug1989, SaulHumphrey1990, BoninManteCarandini2005
-      MeasureContrastSensitivity(
-          model, 
-          size=20.0,
-          orientation=numpy.pi/2, 
-          spatial_frequency=0.28, 
-          temporal_frequency=8.0,
-          grating_duration=147*7,
-          contrasts=[0,25,50,75,100], #[0,50,100],#
-          num_trials=10
-      ),
+      # MeasureContrastSensitivity(
+      #     model, 
+      #     size=20.0,
+      #     orientation=numpy.pi/2, 
+      #     spatial_frequency=0.25, 
+      #     temporal_frequency=8.0,
+      #     grating_duration=147*7,
+      #     contrasts=[0,25,50,75,100], #[0,50,100],#
+      #     num_trials=14
+      # ),
 
       # SPATIAL FREQUENCY TUNING (with different contrasts)
       # as in SolomonWhiteMartin2002, SceniakChatterjeeCallaway2006
@@ -44,7 +44,7 @@ def create_experiments(model):
       #     grating_duration=147*7,
       #     frame_duration=7,
       #     # square=True,
-      #     num_trials=10
+      #     num_trials=14
       # ),
 
       # TEMPORAL FREQUENCY TUNING (with different contrasts)
@@ -65,14 +65,14 @@ def create_experiments(model):
       # as in ClelandLeeVidyasagar1983, BoninManteCarandini2005
       MeasureSizeTuning(
           model, 
-          num_sizes=25, 
-          max_size=20.0, 
+          num_sizes=2, 
+          max_size=4.0, 
           orientation=numpy.pi/2, 
-          spatial_frequency=0.28, #0.15, 
+          spatial_frequency=0.25, #0.15, 
           temporal_frequency=8.0, #8.0,
           grating_duration=147*7,
           contrasts=[80], #40,100  to look for contrast-dependent RF expansion
-          num_trials=15,
+          num_trials=10,
           log_spacing=True,
           with_flat=False #use also flat luminance discs
       ),
@@ -86,7 +86,7 @@ def create_experiments(model):
       # MeasureOrientationTuningFullfield(
       #     model,
       #     num_orientations=8,
-      #     spatial_frequency=0.2,
+      #     spatial_frequency=0.25,
       #     temporal_frequency=8.0,
       #     grating_duration=147*7,
       #     contrasts=[80],
@@ -101,7 +101,7 @@ def create_experiments(model):
       # MeasureFeatureInducedCorrelation(
       #     model, 
       #     contrast=80, 
-      #     spatial_frequencies=[0.2],
+      #     spatial_frequencies=[0.25],
       #     separation=6,
       #     temporal_frequency=8.0,
       #     exp_duration=147*7,

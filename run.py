@@ -25,17 +25,23 @@ logger = mozaik.getMozaikLogger()
 
 
 # TODO: create a set of variable here to manage the type of experiment and whether the pgn, cortex are there or not.
-
+withLGN = True
+withPGN = True
+withV1 = True
 
 if True:
     data_store,model = run_workflow('T15', ThalamoCorticalModel, create_experiments)
-    if False: # PGN
+    
+    if withLGN: # LGN
+        model.connectors['Retina_LGN_ConnectionOn'].store_connections(data_store)    
+        model.connectors['Retina_LGN_ConnectionOff'].store_connections(data_store)    
+    if withPGN: # PGN
         model.connectors['LGN_PGN_ConnectionOn'].store_connections(data_store)    
         model.connectors['LGN_PGN_ConnectionOff'].store_connections(data_store)    
         model.connectors['PGN_PGN_Connection'].store_connections(data_store)    
         model.connectors['PGN_LGN_ConnectionOn'].store_connections(data_store)    
         model.connectors['PGN_LGN_ConnectionOff'].store_connections(data_store)    
-    if False: # CORTEX
+    if withV1: # CORTEX
         model.connectors['V1L4ExcL4ExcConnection'].store_connections(data_store)    
         model.connectors['V1L4ExcL4InhConnection'].store_connections(data_store)    
         model.connectors['V1L4InhL4ExcConnection'].store_connections(data_store)    

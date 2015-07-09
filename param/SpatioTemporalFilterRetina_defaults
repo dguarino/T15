@@ -1,18 +1,22 @@
 {
-    'component': 'mozaik.models.vision.spatiotemporalfilter.SpatioTemporalFilterRetinaLGN',
+    'component': 'mozaik.models.vision.spatiotemporalfilter.SpatioTemporalFilterRGC',
     'params': {
         # --- Cross-Correlation Trick ---
         #'density': 500, # neurons per degree squared 
         #'size'  : (6.0,0.8), # deg; the effective size of the modelled section of retina/lgn
-        # --- Normal ---
-        'density': 10000.0, #100.0 # neurons per degree squared 
-        'size'  : (0.01,0.01), # deg; the effective size of the modelled section of retina/lgn
-        'magnification_factor': 200.0, # μm/degree
+        # --- one cell in the center ---
+        #'density': 10000.0, # high density
+        #'size'  : (0.01,0.01), # deg; but small size
+        # --- Biological ---
+        'density': 300.0, # neurons per degree squared 
+        'size'  : (1.0,1.0), # deg; the effective size of the modelled section of retina/lgn
+        # --- 
+        #'magnification_factor': 200.0, # μm/degree
         'linear_scaler': 1.0, # overall scaling
         'mpi_reproducible_noise' : False,
         'cached' : False,
         'cache_path' : 'retinal_cache/',
-        'recorders' :  url("param/lgn_rec"),
+        'recorders' :  url("param/retina_rec"),
         'recording_interval': 0.1, 
 
         'receptive_field': {
@@ -53,7 +57,7 @@
         },
 
         'gain_control' : {
-            'gain': 50,  # nA*cd/m²
+            'gain': 100,  # nA*cd/m²
             'non_linear_gain' : {
                 'luminance_gain' : 10.0,
                 'luminance_scaler' : 0.01,
@@ -66,13 +70,12 @@
         'cell': {
             'model': 'IF_cond_exp',
             'params': {
-                #'v_thresh': 500.0, # HuertasGroffSmith2005 # -40.0, WorgotterKoch1991 # -35, # Coombes2003
                 'v_thresh': -50.0, # HuertasGroffSmith2005 # -40.0, WorgotterKoch1991 # -35, # Coombes2003
                 'v_rest': -63.0, # Kim Sanchez-Vivez McCormick 1997 # HuertasGroffSmith2005 # -70.0, # WorgotterKoch1991 # 
                 'v_reset': -55.0, # HuertasGroffSmith2005, Kremkow2014, LesicaWengJinYehAlonsoStanley2006
                 'tau_refrac': 4.0, # HuertasGroffSmith2005 # 2 Kremkow2014
                 'tau_m': 10.0, # WorgotterKoch1991
-                'cm': 1.0, # HuertasGroffSmith2005, WorgotterKoch1991 #0.29, Kremkow2014
+                'cm': 1.0, # Kremkow2014
                 'e_rev_E': 0.0, # HuertasGroffSmith2005
                 'e_rev_I': -85.0, # HuertasGroffSmith2005
                 'tau_syn_E': 1.5, # Kremkow
@@ -85,8 +88,7 @@
 
         'noise': {
             'mean': 0.0,
-            #'stdev': 0.0, # nA, spontaneous
-            'stdev': 5.0, # nA, spontaneous
+            'stdev': 15.0, # nA, spontaneous
         }
     }
 }

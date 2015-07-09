@@ -121,8 +121,8 @@
         'delay_functions' : {},
         'weight_expression' : '0.001',
         'delay_expression' : '3.0',
-        'base_weight' : 0.0001, # uS # 0.1 nS GolshaniLiuJones2001
-        'num_samples' : 100, # 2000 MurphyDuckettSillito2000
+        'base_weight' : 0.00005, # uS # 0.1 nS GolshaniLiuJones2001
+        'num_samples' : 50, # 2000 MurphyDuckettSillito2000
         'short_term_plasticity': {
             'U': 1.0, 
             'tau_rec': 30.0, 
@@ -139,8 +139,8 @@
         'delay_functions' : {},
         'weight_expression' : '0.0004',
         'delay_expression' : '3.0',
-        'base_weight' : 0.0004, # uS, 0.4 nS GolshaniLiuJones2001
-        'num_samples' : 10, # 200 MurphyDuckettSIllito2000
+        'base_weight' : 0.0001, # uS, 0.4 nS GolshaniLiuJones2001
+        'num_samples' : 10, # 200 MurphyDuckettSillito2000
         'short_term_plasticity': {
             'U': 1.0, 
             'tau_rec': 30.0, 

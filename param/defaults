@@ -10,7 +10,9 @@
         'size': (20.0, 20.0), # degrees (width, height)
     },
 
-    'retina_lgn': url("param/SpatialFilterRetinaLGN_defaults"),
+    'retina': url("param/SpatioTemporalFilterRetina_defaults"),
+    'lgn_on': url("param/LGNon_defaults"),
+    'lgn_off': url("param/LGNoff_defaults"),
     'pgn': url("param/PGN_defaults"),
     'l4_cortex_exc': url("param/l4_cortex_exc"),
     'l4_cortex_inh': url("param/l4_cortex_inh"),

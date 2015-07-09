@@ -1,0 +1,46 @@
+{
+    # LGN defaults
+
+    'component': 'mozaik.sheets.vision.VisualCorticalUniformSheet', # used as start
+
+    'params':{
+        'name':'LGN_OFF',
+        'sx': ref('lgn_on.params.sx'),
+        'sy': ref('lgn_on.params.sy'),
+        'density': ref('lgn_on.params.density'),
+        'mpi_safe' : ref('lgn_on.params.mpi_safe'),
+        'magnification_factor': ref('lgn_on.params.magnification_factor'),
+        'cell': {
+            'model' : ref('lgn_on.params.cell.model'),
+            'params' : {
+                'v_thresh': ref('lgn_on.params.cell.params.v_thresh'),
+                'v_rest': ref('lgn_on.params.cell.params.v_rest'),
+                'v_reset': ref('lgn_on.params.cell.params.v_reset'),
+                'tau_refrac': ref('lgn_on.params.cell.params.tau_refrac'),
+                'tau_m': ref('lgn_on.params.cell.params.tau_m'),
+                'cm': ref('lgn_on.params.cell.params.cm'),
+                'e_rev_E': ref('lgn_on.params.cell.params.e_rev_E'),
+                'e_rev_I': ref('lgn_on.params.cell.params.e_rev_I'),
+                'tau_syn_E': ref('lgn_on.params.cell.params.tau_syn_E'),
+                'tau_syn_I': ref('lgn_on.params.cell.params.tau_syn_I'),
+            },
+            'initial_values' : {
+                'v': ref('lgn_on.params.cell.initial_values.v'),
+            }
+        },
+        'artificial_stimulators' : {},  
+        'recorders' :  url("param/lgn_rec"),
+        'recording_interval': ref('lgn_on.params.recording_interval'),
+    },
+
+
+    # Connectivity
+
+    'Retina_LGN_ConnectionOff': {
+        'target_synapses' : ref('lgn_on.Retina_LGN_ConnectionOn.target_synapses'),
+        'short_term_plasticity': ref('lgn_on.Retina_LGN_ConnectionOn.short_term_plasticity'),
+        'delay' : ref('lgn_on.Retina_LGN_ConnectionOn.delay'),
+        'weights': ref('lgn_on.Retina_LGN_ConnectionOn.weights'),
+    },
+
+}

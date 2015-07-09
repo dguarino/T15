@@ -1,0 +1,47 @@
+{
+    # LGN defaults
+
+    'component': 'mozaik.sheets.vision.VisualCorticalUniformSheet', # used as start
+
+    'params':{
+        'name':'LGN_ON',
+        'sx': 200.0, # μm
+        'sy': 200.0, # 
+        'density': 300.0,
+        'mpi_safe' : False,
+        'magnification_factor': 200.0, # μm/degree
+        'cell': {
+            'model' : 'IF_cond_exp',
+            'params' : {
+                'v_thresh': -45.0, # WorgotterKoch1991
+                'v_rest': -65.0, # McCormickHuguenard1992 # -70 WorgotterKoch1991
+                'v_reset': -55.0, # HuertasGroffSmith2005, no reset in WorgotterKoch1991
+                'tau_refrac': 4.0, # HuertasGroffSmith2005, no reset in WorgotterKoch1991
+                'tau_m': 10.0, # WorgotterKoch1991
+                'cm': 0.2, # nF see evernote
+                'e_rev_E': 20.0, # WorgotterKoch1991 
+                'e_rev_I': -85.0, # HuertasGroffSmith2005, no inh in WorgotterKoch1991
+                'tau_syn_E': 1.5, # WorgotterKoch1991
+                'tau_syn_I': 5.0, # Kremkow, no inh in WorgotterKoch1991
+            },
+            'initial_values' : {
+                'v': -70.0,
+            }
+        },
+        'artificial_stimulators' : {},  
+        'recorders' :  url("param/lgn_rec"),
+        'recording_interval': 0.1,
+    },
+
+
+    # Connectivity
+
+    # from Retina On
+    'Retina_LGN_ConnectionOn': {
+        'target_synapses' : 'excitatory',             
+        'short_term_plasticity': None, 
+        'delay' : 1, # Lindstrom1982, FunkeEysel1998, RogalaWaleszczyLeskiWrobelWojcik2013
+        'weights': 0.02, # µS 
+    },
+
+}
