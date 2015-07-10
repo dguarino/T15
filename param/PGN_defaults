@@ -95,7 +95,7 @@
         'weight_expression' : 'f1',
         'delay_expression' : '1', # RogalaWaleszczyLeskiWrobelWojcik2013
         'base_weight': 0.001, # µS 0.003
-        'num_samples' : 90,
+        'num_samples' : 45,
     },
 
     # to LGN
@@ -116,7 +116,7 @@
         'weight_expression' : 'f1',
         'delay_expression' : '1', # Lindstrom1982, FunkeEysel1998, RogalaWaleszczyLeskiWrobelWojcik2013
         'base_weight': 0.0005, # µS LamSherman2005
-        'num_samples' : 180,
+        'num_samples' : 90,
     },
     # to LGN
     'PGN_LGN_ConnectionOff': {
@@ -136,7 +136,7 @@
         'weight_expression' : 'f1',
         'delay_expression' : '1', # Lindstrom1982, FunkeEysel1998, RogalaWaleszczyLeskiWrobelWojcik2013
         'base_weight': 0.0005, # µS LamSherman2005
-        'num_samples' : 180,
+        'num_samples' : 90,
     },
 
 }

@@ -10,7 +10,7 @@ from mozaik.space import VisualRegion
 
 # Manage what is executed
 withPGN = True
-withV1 = True
+withV1 = False
 
 class ThalamoCorticalModel(Model):
     

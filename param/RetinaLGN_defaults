@@ -3,40 +3,6 @@
     'params': {
 
         ############################################
-        # LGN
-        'magnification_factor': 200.0, # μm/degree
-        'retino_thalamic_weight': 0.02, # µS 
-        'LGN_cell_params':{
-            'name':'LGN',
-            'sx': 200.0, # μm
-            'sy': 200.0, # 
-            'density': 300.0,
-            'mpi_safe' : False,
-            'magnification_factor': 200.0, # μm/degree
-            'cell': {
-                'model' : 'IF_cond_exp',
-                'params' : {
-                    'v_thresh': -45.0, # WorgotterKoch1991
-                    'v_rest': -65.0, # McCormickHuguenard1992 # -70 WorgotterKoch1991
-                    'v_reset': -55.0, # HuertasGroffSmith2005, no reset in WorgotterKoch1991
-                    'tau_refrac': 4.0, # HuertasGroffSmith2005, no reset in WorgotterKoch1991
-                    'tau_m': 10.0, # WorgotterKoch1991
-                    'cm': 0.2, # nF see evernote
-                    'e_rev_E': 20.0, # WorgotterKoch1991 
-                    'e_rev_I': -85.0, # HuertasGroffSmith2005, no inh in WorgotterKoch1991
-                    'tau_syn_E': 1.5, # WorgotterKoch1991
-                    'tau_syn_I': 5.0, # Kremkow, no inh in WorgotterKoch1991
-                },
-                'initial_values' : {
-                    'v': -70.0,
-                }
-            },
-            'artificial_stimulators' : {},  
-            'recorders' :  url("param/lgn_rec"),
-            'recording_interval': 0.1,
-        },
-
-        ############################################
         # RETINA
         # --- Cross-Correlation Trick ---
         #'density': 500, # neurons per degree squared 
@@ -61,18 +27,11 @@
                 # spatial filter
                 # CaiDeAngelisFreeman1997, AlonsoUsreyReid2001, SceniakChatterjeeCallaway2006 (see paragraph: "Geniculocortical afferent CRF spatial structure")
                 # balance has to be considered for the volumes under the gaussians: 2*pi * A*sigma_x*sigma_y
-                # ex of a balanced RF (center: 1.0*0.7*0.7=0.49; surround: 0.26*1.3*1.3=0.44):
-                # ex of an unbalanced RF (center: 1.0*0.7*0.7=0.49; surround: 0.09*1.45*1.45=0.19):
-                # ex of a slightly unbalanced RF (center: 1.0*0.7*0.7=0.49; surround: 0.1*1.8*1.8=0.32):
-                # ex of an almost balanced RF (center: 1.0*0.7*0.7=0.49; surround: 0.19*1.6*1.6=0.48):
                 # ex of an almost balanced RF (center: 1.0*0.5*0.5=0.25; surround: 0.11*1.5*1.5=0.247):
                 'Ac': 1.0, # CaiDeAngelisFreeman1997 (fixed)
                 'As': 0.11, # CaiDeAngelisFreeman1997 (proportional)
                 'sigma_c': 0.5, # deg Hammond1974, BoninManteCarandini2005, SceniakChatterjeeCallaway2006 (0.5)
                 'sigma_s': 1.5, # deg BoninManteCarandini2005, SceniakChatterjeeCallaway2006 (1.4)
-                #'As': 0.13, # CaiDeAngelisFreeman1997 (proportional)
-                #'sigma_c': 0.7, # deg CaiDeAngelisFreeman1997, AlonsoUsreyReid2001
-                #'sigma_s': 1.8, # deg CaiDeAngelisFreeman1997, AlonsoUsreyReid2001
                 # Temporal filter
                 'K1': 1.05, # AllenFreeman2006
                 'c1': 0.14, # AllenFreeman2006
@@ -125,6 +84,30 @@
         'noise': {
             'mean': 0.0,
             'stdev': 15.0, # nA, spontaneous
-        }
+        },
+
+        ############################################
+        # LGN
+        'magnification_factor': 200.0, # μm/degree
+        'retino_thalamic_weight': 0.04, # µS 
+        'LGN_cell_params': {
+                'model' : 'IF_cond_exp',
+                'params' : {
+                    'v_thresh': -45.0, # WorgotterKoch1991
+                    'v_rest': -65.0, # McCormickHuguenard1992 # -70 WorgotterKoch1991
+                    'v_reset': -55.0, # HuertasGroffSmith2005, no reset in WorgotterKoch1991
+                    'tau_refrac': 4.0, # HuertasGroffSmith2005, no reset in WorgotterKoch1991
+                    'tau_m': 10.0, # WorgotterKoch1991
+                    'cm': 0.2, # nF see evernote
+                    'e_rev_E': 20.0, # WorgotterKoch1991 
+                    'e_rev_I': -85.0, # HuertasGroffSmith2005, no inh in WorgotterKoch1991
+                    'tau_syn_E': 1.5, # WorgotterKoch1991
+                    'tau_syn_I': 5.0, # Kremkow, no inh in WorgotterKoch1991
+                },
+                'initial_values' : {
+                    'v': -70.0,
+                }
+        },
+
     }
 }
