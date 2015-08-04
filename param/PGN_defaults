@@ -15,7 +15,7 @@
                 'v_thresh': -50.0,  # HuertasGroffSmith2005 # -35, # Coombes2003
                 'v_rest': -62.0,    # HuertasGroffSmith2005
                 'v_reset': -55.0,   # HuertasGroffSmith2005
-                'tau_refrac': 4.0,  # HuertasGroffSmith2005
+                'tau_refrac': 5.0,  # HuertasGroffSmith2005
                 'tau_m': 20.0,      # ms # 17.3, Rall1995 # 23.0, DestexheContrerasSteriadeSejnowski1996
                 'cm': 0.2,          # 
                 'e_rev_E': 0.0,     # HuertasGroffSmith2005
@@ -52,8 +52,8 @@
         'delay_functions' : {},
         'weight_expression' : 'f1', 
         'delay_expression' : '1', # Lindstrom1982, FunkeEysel1998, RogalaWaleszczyLeskiWrobelWojcik2013
-        'base_weight': 0.0018, # µS 
-        'num_samples' : 100, # estimated see evernote
+        'base_weight': 0.0005, # µS, LiuBoleaGolshaniJones2001
+        'num_samples' : 60, # estimated see evernote
     },
 
     # from LGN Off
@@ -73,8 +73,8 @@
         'delay_functions' : {},
         'weight_expression' : 'f1',
         'delay_expression' : '1', # ms # Lindstrom1982, FunkeEysel1998, RogalaWaleszczyLeskiWrobelWojcik2013
-        'base_weight': 0.0018, # µS 
-        'num_samples' : 100, # estimated see evernote
+        'base_weight': 0.0005, # µS, LiuBoleaGolshaniJones2001
+        'num_samples' : 60, # estimated see evernote
     },
     
     # lateral
@@ -86,7 +86,7 @@
             'f1' : {
                 'component' : 'mozaik.connectors.modular_connector_functions.ExponentialDecayModularConnectorFunction',
                 'params' : {
-                    'arborization_constant': 200.0,  # μm decay distance from the innervation point
+                    'arborization_constant': 600.0,  # μm decay distance from the innervation point
                     'arborization_scaler': 1.0,   # the scaler of the exponential decay
                 }
             }, 
@@ -94,8 +94,8 @@
         'delay_functions' : {},
         'weight_expression' : 'f1',
         'delay_expression' : '1', # RogalaWaleszczyLeskiWrobelWojcik2013
-        'base_weight': 0.001, # µS 0.003
-        'num_samples' : 45,
+        'base_weight': 0.003, # µS 0.003-5, UlrichHuguenard1996
+        'num_samples' : 90,
     },
 
     # to LGN
@@ -115,8 +115,8 @@
         'delay_functions' : {},
         'weight_expression' : 'f1',
         'delay_expression' : '1', # Lindstrom1982, FunkeEysel1998, RogalaWaleszczyLeskiWrobelWojcik2013
-        'base_weight': 0.0005, # µS LamSherman2005
-        'num_samples' : 90,
+        'base_weight': 0.0002, # µS SanchezMcCormick1997, LamSherman2011
+        'num_samples' : 180,
     },
     # to LGN
     'PGN_LGN_ConnectionOff': {
@@ -135,8 +135,8 @@
         'delay_functions' : {},
         'weight_expression' : 'f1',
         'delay_expression' : '1', # Lindstrom1982, FunkeEysel1998, RogalaWaleszczyLeskiWrobelWojcik2013
-        'base_weight': 0.0005, # µS LamSherman2005
-        'num_samples' : 90,
+        'base_weight': 0.0002, # µS SanchezMcCormick1997, LamSherman2011
+        'num_samples' : 180,
     },
 
 }

@@ -10,7 +10,7 @@ from mozaik.space import VisualRegion
 
 # Manage what is executed
 withPGN = True
-withV1 = False
+withV1 = True
 
 class ThalamoCorticalModel(Model):
     
@@ -18,8 +18,6 @@ class ThalamoCorticalModel(Model):
         'l4_cortex_exc' : ParameterSet, 
         'l4_cortex_inh' : ParameterSet, 
         'pgn' : ParameterSet, 
-        # 'lgn_on' : ParameterSet, 
-        # 'lgn_off' : ParameterSet, 
         'lgn' : ParameterSet,
         'visual_field' : ParameterSet 
     })

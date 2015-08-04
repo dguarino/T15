@@ -27,7 +27,7 @@ logger = mozaik.getMozaikLogger()
 # Manage what is executed
 # a set of variable here to manage the type of experiment and whether the pgn, cortex are there or not.
 withPGN = True
-withV1 = False
+withV1 = True
 
 
 if True:

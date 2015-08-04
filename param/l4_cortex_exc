@@ -118,11 +118,19 @@
     'EfferentConnection_LGN': {
         'target_synapses' : 'excitatory',               
         'weight_functions' : {},
-        'delay_functions' : {},
-        'weight_expression' : '0.001',
+        'delay_functions' :  {
+            'f1' : {
+                'component' : 'mozaik.connectors.modular_connector_functions.ExponentialDecayModularConnectorFunction',
+                'params' : {
+                    'arborization_constant': 600.0,  # μm decay distance from the innervation point
+                    'arborization_scaler': 1.0,   # the scaler of the exponential decay
+                }
+            }, 
+        },
+        'weight_expression' : '0.0001',
         'delay_expression' : '3.0',
-        'base_weight' : 0.00005, # uS # 0.1 nS GolshaniLiuJones2001
-        'num_samples' : 50, # 2000 MurphyDuckettSillito2000
+        'base_weight' : 0.0001, # µS, GolshaniLiuJones2001
+        'num_samples' : 200, # MurphyDuckettSillito2000
         'short_term_plasticity': {
             'U': 1.0, 
             'tau_rec': 30.0, 
@@ -135,12 +143,20 @@
     # V1 to PGN
     'EfferentConnection_PGN': {
         'target_synapses' : 'excitatory',               
-        'weight_functions' : {},
+        'weight_functions' :  {
+            'f1' : {
+                'component' : 'mozaik.connectors.modular_connector_functions.ExponentialDecayModularConnectorFunction',
+                'params' : {
+                    'arborization_constant': 25.0,  # μm decay distance from the innervation point
+                    'arborization_scaler': 1.0,   # the scaler of the exponential decay
+                }
+            }, 
+        },
         'delay_functions' : {},
         'weight_expression' : '0.0004',
         'delay_expression' : '3.0',
-        'base_weight' : 0.0001, # uS, 0.4 nS GolshaniLiuJones2001
-        'num_samples' : 10, # 200 MurphyDuckettSillito2000
+        'base_weight' : 0.0004, # µS, GolshaniLiuJones2001, LiuBoleaGolshaniJones2001 (400 ± 257 pS), mouse
+        'num_samples' : 20, # MurphyDuckettSillito2000
         'short_term_plasticity': {
             'U': 1.0, 
             'tau_rec': 30.0, 

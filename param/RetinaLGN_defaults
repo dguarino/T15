@@ -52,7 +52,7 @@
         },
 
         'gain_control' : {
-            'gain': 100,  # nA*cd/m²
+            'gain': 150,  # nA*cd/m²
             'non_linear_gain' : {
                 'luminance_gain' : 10.0,
                 'luminance_scaler' : 0.01,
