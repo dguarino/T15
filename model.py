@@ -52,7 +52,7 @@ class ThalamoCorticalModel(Model):
             ModularSamplingProbabilisticConnector(
                 self,
                 'LGN_PGN_ConnectionOn',                     # name
-                self.input_layer.mozaik_sheets['X_ON'],     # source
+                self.input_layer.sheets['X_ON'],     # source
                 pgn,                                        # target
                 self.parameters.pgn.LGN_PGN_ConnectionOn    # params
             ).connect()
@@ -60,7 +60,7 @@ class ThalamoCorticalModel(Model):
             ModularSamplingProbabilisticConnector(
                 self,
                 'LGN_PGN_ConnectionOff',                    # name
-                self.input_layer.mozaik_sheets['X_OFF'],    # source
+                self.input_layer.sheets['X_OFF'],    # source
                 pgn,                                        # target
                 self.parameters.pgn.LGN_PGN_ConnectionOff   # params
             ).connect()
@@ -77,7 +77,7 @@ class ThalamoCorticalModel(Model):
                 self,
                 'PGN_LGN_ConnectionOn',                     # name
                 pgn,                                        # source
-                self.input_layer.mozaik_sheets['X_ON'],     # target
+                self.input_layer.sheets['X_ON'],     # target
                 self.parameters.pgn.PGN_LGN_ConnectionOn    # params
             ).connect()
 
@@ -85,7 +85,7 @@ class ThalamoCorticalModel(Model):
                 self,
                 'PGN_LGN_ConnectionOff',                    # name
                 pgn,                                        # source
-                self.input_layer.mozaik_sheets['X_OFF'],    # target
+                self.input_layer.sheets['X_OFF'],    # target
                 self.parameters.pgn.PGN_LGN_ConnectionOff   # params
             ).connect()
 
@@ -101,8 +101,8 @@ class ThalamoCorticalModel(Model):
             # THALAMO-CORTICAL
             GaborConnector(
                 self,
-                self.input_layer.mozaik_sheets['X_ON'],
-                self.input_layer.mozaik_sheets['X_OFF'],
+                self.input_layer.sheets['X_ON'],
+                self.input_layer.sheets['X_OFF'],
                 cortex_exc_l4,                                      # target
                 self.parameters.l4_cortex_exc.AfferentConnection,   # parameters
                 'V1AffConnection'                                   # name
@@ -110,8 +110,8 @@ class ThalamoCorticalModel(Model):
 
             GaborConnector(
                 self,
-                self.input_layer.mozaik_sheets['X_ON'],
-                self.input_layer.mozaik_sheets['X_OFF'],
+                self.input_layer.sheets['X_ON'],
+                self.input_layer.sheets['X_OFF'],
                 cortex_inh_l4,
                 self.parameters.l4_cortex_inh.AfferentConnection,
                 'V1AffInhConnection'
@@ -157,7 +157,7 @@ class ThalamoCorticalModel(Model):
                 self,
                 'V1EffConnectionOn',
                 cortex_exc_l4,
-                self.input_layer.mozaik_sheets['X_ON'],
+                self.input_layer.sheets['X_ON'],
                 self.parameters.l4_cortex_exc.EfferentConnection_LGN
             ).connect()
 
@@ -165,7 +165,7 @@ class ThalamoCorticalModel(Model):
                 self,
                 'V1EffConnectionOff',
                 cortex_exc_l4,
-                self.input_layer.mozaik_sheets['X_OFF'],
+                self.input_layer.sheets['X_OFF'],
                 self.parameters.l4_cortex_exc.EfferentConnection_LGN
             ).connect()
 

@@ -148,8 +148,8 @@ def perform_analysis_and_visualization(data_store):
         #     TrialAveragedFiringRate( dsv1_V1e, ParameterSet({}) ).analyse()
         #     # dsv1_V1i = param_filter_query( data_store, st_name='FullfieldDriftingSinusoidalGrating', sheet_name='V1_Inh_L4' )  
         #     # TrialAveragedFiringRate( dsv1_V1i, ParameterSet({}) ).analyse()
-        # #TrialAveragedSparseness( dsv10, ParameterSet({}) ).analyse() # on responses: Sparseness
-        # #Analog_MeanSTDAndFanoFactor( dsv10, ParameterSet({}) ).analyse() # on Vm: FanoFactor
+        ##TrialAveragedSparseness( dsv10, ParameterSet({}) ).analyse() # on responses: Sparseness
+        ##Analog_MeanSTDAndFanoFactor( dsv10, ParameterSet({}) ).analyse() # on Vm: FanoFactor
 
         ##-------------------------------------
         ## SIZE TUNING
@@ -157,16 +157,16 @@ def perform_analysis_and_visualization(data_store):
         TrialAveragedFiringRate( dsv10, ParameterSet({}) ).analyse() # on responses
         dsv11 = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', sheet_name='X_OFF' )  
         TrialAveragedFiringRate( dsv11, ParameterSet({}) ).analyse() # on responses
-        # dsv12 = param_filter_query( data_store, st_name='FlatDisk', sheet_name='X_ON' )  
-        # TrialAveragedFiringRate( dsv12, ParameterSet({}) ).analyse() # on responses
-        # dsv13 = param_filter_query( data_store, st_name='FlatDisk', sheet_name='X_OFF' )  
-        # TrialAveragedFiringRate( dsv13, ParameterSet({}) ).analyse() # on responses
         if withPGN:
             dsv12 = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', sheet_name='PGN' )  
             TrialAveragedFiringRate( dsv12, ParameterSet({}) ).analyse() # on responses
         if withV1:
             dsv11 = param_filter_query( data_store, st_name='DriftingSinusoidalGratingDisk', sheet_name='V1_Exc_L4' )  
             TrialAveragedFiringRate( dsv11, ParameterSet({}) ).analyse() # on responses
+        # dsv12 = param_filter_query( data_store, st_name='FlatDisk', sheet_name='X_ON' )  
+        # TrialAveragedFiringRate( dsv12, ParameterSet({}) ).analyse() # on responses
+        # dsv13 = param_filter_query( data_store, st_name='FlatDisk', sheet_name='X_OFF' )  
+        # TrialAveragedFiringRate( dsv13, ParameterSet({}) ).analyse() # on responses
 
         ##-------------------------------------
         ## ORIENTATION TUNING
